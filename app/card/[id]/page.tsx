@@ -216,7 +216,7 @@ export default function CardViewPage() {
                     <span className="ml-2">{card.email}</span>
                   </div>
                   <div> 
-                    <a href={`https://wa.me${card.phone}`}>
+                    <a href={`https://wa.me/${card.phone}`}>
                       <span className="font-medium text-gray-700">Phone:</span>
                       <span className="ml-2">{card.phone}</span>
                     </a>
