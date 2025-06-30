@@ -22,8 +22,11 @@ export async function POST(request: NextRequest) {
     const client = await clientPromise;
     const db = client.db('visitingcards');
     
+    // Remove _id if present to avoid type conflict with MongoDB's ObjectId
+    const { _id, ...cardDataWithoutId } = cardData;
+
     const newCard = {
-      ...cardData,
+      ...cardDataWithoutId,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
