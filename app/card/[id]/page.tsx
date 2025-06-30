@@ -215,13 +215,17 @@ export default function CardViewPage() {
                     <span className="font-medium text-gray-700">Email:</span>
                     <span className="ml-2">{card.email}</span>
                   </div>
-                  <div>
-                    <span className="font-medium text-gray-700">Phone:</span>
-                    <span className="ml-2">{card.phone}</span>
+                  <div> 
+                    <a href={`https://wa.me${card.phone}`}>
+                      <span className="font-medium text-gray-700">Phone:</span>
+                      <span className="ml-2">{card.phone}</span>
+                    </a>
                   </div>
                   <div>
-                    <span className="font-medium text-gray-700">Website:</span>
-                    <span className="ml-2">{card.website}</span>
+                    <a href={card.website}>
+                      <span className="font-medium text-gray-700">Website:</span>
+                      <span className="ml-2">{card.website}</span>
+                    </a>
                   </div>
                   <div>
                     <span className="font-medium text-gray-700">Address:</span>
