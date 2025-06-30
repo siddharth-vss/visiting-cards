@@ -112,7 +112,7 @@ export default function QRCodeGenerator({ url, cardName }: QRCodeGeneratorProps)
             Download QR
           </Button>
           
-          {typeof window !== 'undefined' && navigator.share && (
+          {typeof window !== 'undefined' && typeof navigator.share === 'function' && (
             <Button variant="outline" size="sm" onClick={shareQRCode}>
               <Share2 size={14} className="mr-2" />
               Share QR
