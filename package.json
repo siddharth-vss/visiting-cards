@@ -39,9 +39,11 @@
     "@radix-ui/react-toggle-group": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.1.2",
     "@types/node": "20.6.2",
+    "@types/qrcode": "^1.5.5",
     "@types/react": "18.2.22",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.15",
+    "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
@@ -51,6 +53,7 @@
     "eslint-config-next": "13.5.1",
     "html2canvas": "^1.4.1",
     "input-otp": "^1.2.4",
+    "jsonwebtoken": "^9.0.2",
     "jspdf": "^2.5.1",
     "lucide-react": "^0.446.0",
     "mongodb": "^6.3.0",
@@ -71,7 +74,9 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2",
     "vaul": "^0.9.9",
-    "zod": "^3.23.8",
-    "@types/qrcode": "^1.5.5"
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10"
   }
 }

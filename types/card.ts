@@ -17,6 +17,7 @@ export interface CardData {
   font: string;
   createdAt?: Date;
   updatedAt?: Date;
+  userId : string; 
 }
 
 export interface CardTemplate {
