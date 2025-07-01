@@ -305,7 +305,7 @@ export default function Home() {
                     cardData={currentCard}
                     onSave={saveCard}
                     saving={savingCard}
-                    canSave={user && (isEditing || (limitData?.canCreateMore ?? false))}
+                    canSave={!!user && (isEditing || !!limitData?.canCreateMore)}
                   />
                   {!user && (
                     <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">

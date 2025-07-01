@@ -13,6 +13,8 @@ import Link from 'next/link';
 
 interface CardPreviewProps {
   cardData: CardData;
+  saving : boolean ;
+  canSave : boolean ;
   onSave?: () => void;
 }
 
