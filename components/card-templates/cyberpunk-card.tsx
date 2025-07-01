@@ -8,7 +8,7 @@ interface CyberpunkCardProps {
 export default function CyberpunkCard({ data }: CyberpunkCardProps) {
   return (
     <div 
-      className="w-96 h-56 rounded-lg shadow-2xl overflow-hidden relative"
+      className="w-96 h-64 rounded-lg shadow-2xl overflow-hidden relative"
       style={{ 
         backgroundColor: '#0d1117',
         border: `1px solid ${data.colors.primary}`,
@@ -100,7 +100,7 @@ export default function CyberpunkCard({ data }: CyberpunkCardProps) {
                   boxShadow: `0 0 5px ${data.colors.primary}`
                 }}
               />
-              <span className="text-gray-300">{data.email}</span>
+              <span className="text-gray-300 break-all whitespace-normal">{data.email}</span>
             </div>
             <div className="flex items-center gap-2">
               <div 
@@ -110,7 +110,7 @@ export default function CyberpunkCard({ data }: CyberpunkCardProps) {
                   boxShadow: `0 0 5px ${data.colors.secondary}`
                 }}
               />
-              <span className="text-gray-300">{data.phone}</span>
+              <span className="text-gray-300 break-all whitespace-normal">{data.phone}</span>
             </div>
             <div className="flex items-center gap-2">
               <div 
@@ -120,7 +120,7 @@ export default function CyberpunkCard({ data }: CyberpunkCardProps) {
                   boxShadow: `0 0 5px ${data.colors.primary}`
                 }}
               />
-              <span className="text-gray-300">{data.website}</span>
+              <span className="text-gray-300 break-all whitespace-normal">{data.website}</span>
             </div>
             <div className="flex items-center gap-2">
               <div 
@@ -130,7 +130,7 @@ export default function CyberpunkCard({ data }: CyberpunkCardProps) {
                   boxShadow: `0 0 5px ${data.colors.secondary}`
                 }}
               />
-              <span className="text-gray-300">{data.address}</span>
+              <span className="text-gray-300 break-all whitespace-normal">{data.address}</span>
             </div>
           </div>
         </div>
