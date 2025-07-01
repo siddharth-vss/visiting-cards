@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useAuth } from '@/lib/auth-context';
 import { CardData } from '@/types/card';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cardTemplates } from './card-templates';
-import { Trash2, Edit, Copy, Download, Share2, ExternalLink, QrCode } from 'lucide-react';
+import { Trash2, Edit, Copy, Download, Share2, ExternalLink, QrCode, Crown } from 'lucide-react';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { toast } from 'sonner';
@@ -15,23 +16,37 @@ import QRCodeGenerator from './qr-code-generator';
 
 interface SavedCardsProps {
   onEditCard: (card: CardData) => void;
+  onCardDeleted?: () => void;
 }
 
-export default function SavedCards({ onEditCard }: SavedCardsProps) {
+export default function SavedCards({ onEditCard, onCardDeleted }: SavedCardsProps) {
+  const { user } = useAuth();
   const [cards, setCards] = useState<CardData[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCardForQR, setSelectedCardForQR] = useState<CardData | null>(null);
 
   useEffect(() => {
-    fetchCards();
-  }, []);
+    if (user) {
+      fetchCards();
+    }
+  }, [user]);
 
   const fetchCards = async () => {
     try {
-      const response = await fetch('/api/cards');
+      const token = localStorage.getItem('token');
+      const response = await fetch('/api/cards', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      
       if (response.ok) {
         const data = await response.json();
-        setCards(data);
+        // Ensure we only show cards belonging to the current user
+        const userCards = data.filter((card: CardData) => card.userId === user?._id);
+        setCards(userCards);
+      } else {
+        toast.error('Failed to load cards');
       }
     } catch (error) {
       console.error('Error fetching cards:', error);
@@ -43,13 +58,21 @@ export default function SavedCards({ onEditCard }: SavedCardsProps) {
 
   const deleteCard = async (cardId: string) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`/api/cards/${cardId}`, {
         method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
       });
 
       if (response.ok) {
         setCards(cards.filter(card => card._id !== cardId));
         toast.success('Card deleted successfully');
+        // Notify parent component to refresh card count
+        if (onCardDeleted) {
+          onCardDeleted();
+        }
       } else {
         toast.error('Failed to delete card');
       }
@@ -114,7 +137,11 @@ export default function SavedCards({ onEditCard }: SavedCardsProps) {
       <Card className="text-center p-8">
         <CardContent>
           <h3 className="text-lg font-semibold mb-2">No saved cards yet</h3>
-          <p className="text-gray-600">Create your first business card to see it here!</p>
+          <p className="text-gray-600 mb-4">Create your first business card to see it here!</p>
+          <div className="text-sm text-blue-600 bg-blue-50 p-3 rounded-lg">
+            <Crown size={16} className="inline mr-1" />
+            Free users can create up to 3 cards
+          </div>
         </CardContent>
       </Card>
     );
@@ -123,8 +150,14 @@ export default function SavedCards({ onEditCard }: SavedCardsProps) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold">Saved Cards</h2>
-        <Badge variant="secondary">{cards.length} cards</Badge>
+        <h2 className="text-2xl font-bold">My Cards</h2>
+        <div className="flex items-center gap-2">
+          <Badge variant="secondary">{cards.length} / 3 cards</Badge>
+          <Badge variant="outline" className="text-blue-600">
+            <Crown size={12} className="mr-1" />
+            Free Plan
+          </Badge>
+        </div>
       </div>
 
       <div className="grid gap-4">
@@ -142,6 +175,9 @@ export default function SavedCards({ onEditCard }: SavedCardsProps) {
                     <div className="flex items-center gap-2 mt-2">
                       <Badge variant="outline">{template?.name}</Badge>
                       <Badge variant="secondary">{template?.category}</Badge>
+                      <Badge variant="outline" className="text-xs text-green-600">
+                        Your Card
+                      </Badge>
                     </div>
                   </div>
                   <div className="flex gap-2 flex-wrap">
@@ -246,6 +282,23 @@ export default function SavedCards({ onEditCard }: SavedCardsProps) {
           );
         })}
       </div>
+
+      {/* Upgrade Prompt */}
+      {cards.length >= 3 && (
+        <Card className="p-6 bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+          <div className="text-center">
+            <Crown size={32} className="mx-auto mb-3 text-blue-600" />
+            <h3 className="text-lg font-semibold mb-2">Ready for More?</h3>
+            <p className="text-gray-600 mb-4">
+              You've reached your free limit of 3 cards. Upgrade to create unlimited business cards!
+            </p>
+            <Button className="bg-gradient-to-r from-blue-600 to-purple-600">
+              <Crown size={16} className="mr-2" />
+              Upgrade to Pro
+            </Button>
+          </div>
+        </Card>
+      )}
     </div>
   );
 }
