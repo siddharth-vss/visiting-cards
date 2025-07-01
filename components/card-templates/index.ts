@@ -1,8 +1,7 @@
 import { CardTemplate } from '@/types/card';
 import ModernCard from './modern-card';
-import ClassicCard from './classic-card';
+
 import ElegantCard from './elegant-card';
-import CreativeCard from './creative-card';
 import MinimalistCard from './minimalist-card';
 import GradientCard from './gradient-card';
 import CorporateCard from './corporate-card';
@@ -10,6 +9,13 @@ import ArtisticCard from './artistic-card';
 import TechCard from './tech-card';
 import LuxuryCard from './luxury-card';
 import GeometricCard from './geometric-card';
+import NeonCard from './neon-card';
+import VintageCard from './vintage-card';
+import GlassCard from './glass-card';
+import NatureCard from './nature-card';
+import CyberpunkCard from './cyberpunk-card';
+import WatercolorCard from './watercolor-card';
+import OrigamiCard from './origami-card';
 
 export const cardTemplates: CardTemplate[] = [
   {
@@ -19,13 +25,7 @@ export const cardTemplates: CardTemplate[] = [
     preview: '/templates/modern-preview.png',
     component: ModernCard,
   },
-  {
-    id: 'classic',
-    name: 'Classic',
-    category: 'Traditional',
-    preview: '/templates/classic-preview.png',
-    component: ClassicCard,
-  },
+  
   {
     id: 'elegant',
     name: 'Elegant',
@@ -33,13 +33,7 @@ export const cardTemplates: CardTemplate[] = [
     preview: '/templates/elegant-preview.png',
     component: ElegantCard,
   },
-  {
-    id: 'creative',
-    name: 'Creative',
-    category: 'Artistic',
-    preview: '/templates/creative-preview.png',
-    component: CreativeCard,
-  },
+  
   {
     id: 'minimalist',
     name: 'Minimalist',
@@ -89,18 +83,72 @@ export const cardTemplates: CardTemplate[] = [
     preview: '/templates/geometric-preview.png',
     component: GeometricCard,
   },
+  {
+    id: 'neon',
+    name: 'Neon',
+    category: 'Futuristic',
+    preview: '/templates/neon-preview.png',
+    component: NeonCard,
+  },
+  {
+    id: 'vintage',
+    name: 'Vintage',
+    category: 'Classic',
+    preview: '/templates/vintage-preview.png',
+    component: VintageCard,
+  },
+  {
+    id: 'glass',
+    name: 'Glass',
+    category: 'Modern',
+    preview: '/templates/glass-preview.png',
+    component: GlassCard,
+  },
+  {
+    id: 'nature',
+    name: 'Nature',
+    category: 'Organic',
+    preview: '/templates/nature-preview.png',
+    component: NatureCard,
+  },
+  {
+    id: 'cyberpunk',
+    name: 'Cyberpunk',
+    category: 'Futuristic',
+    preview: '/templates/cyberpunk-preview.png',
+    component: CyberpunkCard,
+  },
+  {
+    id: 'watercolor',
+    name: 'Watercolor',
+    category: 'Artistic',
+    preview: '/templates/watercolor-preview.png',
+    component: WatercolorCard,
+  },
+  {
+    id: 'origami',
+    name: 'Origami',
+    category: 'Creative',
+    preview: '/templates/origami-preview.png',
+    component: OrigamiCard,
+  },
 ];
 
 export { 
   ModernCard, 
-  ClassicCard, 
   ElegantCard, 
-  CreativeCard,
   MinimalistCard,
   GradientCard,
   CorporateCard,
   ArtisticCard,
   TechCard,
   LuxuryCard,
-  GeometricCard
+  GeometricCard,
+  NeonCard,
+  VintageCard,
+  GlassCard,
+  NatureCard,
+  CyberpunkCard,
+  WatercolorCard,
+  OrigamiCard
 };
