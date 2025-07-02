@@ -17,9 +17,9 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-md p-0 overflow-hidden">
         {isLogin ? (
-          <LoginForm onSwitchToRegister={() => setIsLogin(false)} />
+          <LoginForm onSwitchToRegister={() => setIsLogin(false)} OnClose ={()=>onClose()}/>
         ) : (
-          <RegisterForm onSwitchToLogin={() => setIsLogin(true)} />
+          <RegisterForm onSwitchToLogin={() => setIsLogin(true)} OnClose ={()=>onClose()} />
         )}
       </DialogContent>
     </Dialog>

@@ -10,9 +10,10 @@ import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
 
 interface LoginFormProps {
   onSwitchToRegister: () => void;
+  OnClose :() => void;
 }
 
-export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
+export default function LoginForm({ onSwitchToRegister,OnClose }: LoginFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -29,6 +30,7 @@ export default function LoginForm({ onSwitchToRegister }: LoginFormProps) {
     }
     
     setLoading(false);
+    OnClose()
   };
 
   return (
